@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Purchase Page</title>
+   <style>
+       body {
+           background-color: #4b2e83; /* UW Purple */
+           color: #b7a57a; /* UW Gold */
+           text-align: center;
+           font-family: Arial, sans-serif;
+       }
+       .container {
+           margin-top: 10%;
+       }
+       .btn {
+           background-color: #b7a57a; /* UW Gold */
+           border: none;
+           padding: 15px 30px;
+           font-size: 18px;
+           cursor: pointer;
+           border-radius: 5px;
+           color: #4b2e83; /* UW Purple */
+           font-weight: bold;
+           margin: 10px;
+       }
+       .btn:hover {
+           background-color: #85754d; /* Darker Gold */
+       }
+       .nav {
+           margin-top: 20px;
+       }
+       .nav a {
+           color: #b7a57a;
+           text-decoration: none;
+           font-size: 18px;
+           margin: 10px;
+           display: inline-block;
+       }
+       .modal {
+           display: none;
+           position: fixed;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           background: white;
+           padding: 20px;
+           border-radius: 10px;
+           text-align: center;
+           width: 300px;
+       }
+       .modal input {
+           display: block;
+           margin: 10px auto;
+           padding: 10px;
+           width: 80%;
+       }
+       .modal .btn {
+           width: 50%;
+       }
+       .close {
+           cursor: pointer;
+           position: absolute;
+           right: 10px;
+           top: 10px;
+           font-size: 20px;
+           font-weight: bold;
+       }
+   </style>
+</head>
+<body>
+   <div class="container">
+       <h1>Welcome to Our Store</h1>
+       <p>Click below to make a purchase.</p>
+       <button class="btn" onclick="purchase()">Purchase</button>
+       <button class="btn" onclick="learnMore()">Learn More</button>
+   </div>
+
+
+   <div class="nav">
+       <a href="#" onclick="openLoginModal()">Login</a>
+       <a href="#" onclick="openSignUpModal()">Sign Up</a>
+   </div>
+
+
+   <div id="loginModal" class="modal">
+       <span class="close" onclick="closeModal('loginModal')">&times;</span>
+       <h2>Login</h2>
+       <input type="text" id="loginUsername" placeholder="Username">
+       <input type="password" id="loginPassword" placeholder="Password">
+       <button class="btn" onclick="login()">Login</button>
+   </div>
+
+
+   <div id="signUpModal" class="modal">
+       <span class="close" onclick="closeModal('signUpModal')">&times;</span>
+       <h2>Sign Up</h2>
+       <input type="text" id="signUpUsername" placeholder="Username">
+       <input type="password" id="signUpPassword" placeholder="Password">
+       <button class="btn" onclick="signUp()">Sign Up</button>
+   </div>
+
+
+   <script>
+       function purchase() {
+           window.location.href = "terminal.html";
+       }
+       function learnMore() {
+           alert('More details coming soon!');
+       }
+       function openLoginModal() {
+           document.getElementById('loginModal').style.display = 'block';
+       }
+       function openSignUpModal() {
+           document.getElementById('signUpModal').style.display = 'block';
+       }
+       function closeModal(modalId) {
+           document.getElementById(modalId).style.display = 'none';
+       }
+       function signUp() {
+           let username = document.getElementById('signUpUsername').value;
+           let password = document.getElementById('signUpPassword').value;
+           if (username && password) {
+               localStorage.setItem(username, password);
+               alert('Sign-up successful! Please log in.');
+               closeModal('signUpModal');
+           } else {
+               alert('Please enter a username and password.');
+           }
+       }
+       function login() {
+           let username = document.getElementById('loginUsername').value;
+           let password = document.getElementById('loginPassword').value;
+           let storedPassword = localStorage.getItem(username);
+           if (storedPassword && storedPassword === password) {
+               alert('Login successful!');
+               window.location.href = "https://kaso2.github.io/welcome.html";
+               ;
+           } else {
+               alert('Invalid username or password.');
+           }
+       }
+   </script>
+</body>
+</html>
